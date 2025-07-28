@@ -10,10 +10,8 @@ import org.locationtech.jts.geom.Point;
 
 import java.time.Instant;
 
-@Setter
 @Getter
 @EqualsAndHashCode(callSuper = false)
-@AllArgsConstructor
 @Entity
 @Table(name = "tb_order")
 public class Order extends AuditableEntity {
@@ -38,13 +36,33 @@ public class Order extends AuditableEntity {
     protected Instant deliveredOn;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "deliveryman_id", nullable = false)
+    @JoinColumn(name = "deliveryman_id")
     private DeliveryMan deliveryMan;
 
     public Order() { }
 
-    @PreUpdate
-    protected void onDelivered() {
+    public Order(final String description, final Point collectPoint, final Point deliveredPoint) {
+        this.description = description;
+        this.collectionPoint = collectPoint;
+        this.deliveredPoint = deliveredPoint;
+        this.orderStatus = OrderStatus.CREATED;
+    }
+
+    public void assignDeliveryMan(final DeliveryMan deliveryMan) {
+
+        if (this.orderStatus != OrderStatus.CREATED) {
+            throw new  IllegalArgumentException("Order cannot be marked as delivered if not in transit.");
+        }
+        this.orderStatus = OrderStatus.ALLOCATED;
+        this.deliveryMan = deliveryMan;
+    }
+
+    public void markAsDelivered() {
+
+        if (this.orderStatus != OrderStatus.IN_TRANSIT) {
+            throw new IllegalArgumentException("Order cannot be marked as delivered if not in transit.");
+        }
+        this.orderStatus = OrderStatus.DELIVERED;
         this.deliveredOn = Instant.now();
     }
 }

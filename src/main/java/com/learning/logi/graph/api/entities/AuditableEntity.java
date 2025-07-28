@@ -13,5 +13,9 @@ public abstract class AuditableEntity {
     protected void onCreate() {
         this.createdOn = Instant.now();
     }
+
+    public Instant getCreatedOn() {
+        return createdOn;
+    }
 }
 
