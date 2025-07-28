@@ -1,6 +1,9 @@
-package com.learning.logi.graph.api.entities;
+package com.learning.logi.graph.api.domain.delivery_man.entities;
 
-import com.learning.logi.graph.api.entities.enums.DeliveryManStatus;
+import com.learning.logi.graph.api.domain.AuditableEntity;
+import com.learning.logi.graph.api.domain.delivery_man.enums.DeliveryManStatus;
+import com.learning.logi.graph.api.domain.order.entities.Order;
+import com.learning.logi.graph.api.domain.vehicle.entities.Vehicle;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -32,7 +35,7 @@ public class DeliveryMan extends AuditableEntity {
     @Enumerated(EnumType.STRING)
     private DeliveryManStatus deliveryManStatus;
 
-    @Column(columnDefinition = "geography(Point, 4326)")
+    //@Column(columnDefinition = "geography(Point, 4326)")
     private Point currentLocation;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -1,7 +1,4 @@
-package com.learning.logi.graph.api.dtos;
-
-import com.learning.logi.graph.api.entities.Order;
-import com.learning.logi.graph.api.entities.enums.OrderStatus;
+package com.learning.logi.graph.api.domain.order.dto;
 
 public record OrderInsertDTO(
         String description,

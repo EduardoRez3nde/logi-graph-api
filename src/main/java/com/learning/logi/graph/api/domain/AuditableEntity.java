@@ -1,4 +1,4 @@
-package com.learning.logi.graph.api.entities;
+package com.learning.logi.graph.api.domain;
 
 import jakarta.persistence.*;
 import java.time.Instant;

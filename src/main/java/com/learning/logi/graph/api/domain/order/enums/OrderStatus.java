@@ -1,4 +1,4 @@
-package com.learning.logi.graph.api.entities.enums;
+package com.learning.logi.graph.api.domain.order.enums;
 
 public enum OrderStatus {
 

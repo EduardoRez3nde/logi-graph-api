@@ -1,8 +1,9 @@
-package com.learning.logi.graph.api.entities;
+package com.learning.logi.graph.api.domain.order.entities;
 
-import com.learning.logi.graph.api.entities.enums.OrderStatus;
+import com.learning.logi.graph.api.domain.AuditableEntity;
+import com.learning.logi.graph.api.domain.delivery_man.entities.DeliveryMan;
+import com.learning.logi.graph.api.domain.order.enums.OrderStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +11,7 @@ import org.locationtech.jts.geom.Point;
 
 import java.time.Instant;
 
+@Setter
 @Getter
 @EqualsAndHashCode(callSuper = false)
 @Entity
@@ -20,7 +22,7 @@ public class Order extends AuditableEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String description;
 
     @Enumerated(EnumType.STRING)
