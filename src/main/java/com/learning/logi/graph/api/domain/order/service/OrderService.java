@@ -5,7 +5,7 @@ import com.learning.logi.graph.api.domain.order.dto.OrderResponseDTO;
 import com.learning.logi.graph.api.domain.order.entities.Order;
 import com.learning.logi.graph.api.domain.order.enums.OrderStatus;
 import com.learning.logi.graph.api.domain.order.repository.OrderRepository;
-import com.learning.logi.graph.api.presentation.exceptions.ResourceNotFound;
+import com.learning.logi.graph.api.presentation.exceptions.ResourceNotFoundException;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
@@ -48,7 +48,7 @@ public class OrderService {
     public OrderResponseDTO findById(final Long id) {
 
         final Order order = orderRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFound("resource not found with id " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("resource not found with id " + id));
 
         return OrderResponseDTO.of(order);
     }

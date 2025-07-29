@@ -10,7 +10,6 @@ import lombok.Setter;
 @Setter
 @Getter
 @EqualsAndHashCode
-@AllArgsConstructor
 @Entity
 @Table(name = "tb_vehicle")
 public class Vehicle {
@@ -29,4 +28,26 @@ public class Vehicle {
     private Double maxCapacityKg;
 
     public Vehicle() { }
+
+    private Vehicle(
+            final String vehicleLicensePlate,
+            final VehicleType vehicleType,
+            final Double maxCapacityKg
+    ) {
+        this.vehicleLicensePlate = vehicleLicensePlate;
+        this.vehicleType = vehicleType;
+        this.maxCapacityKg = maxCapacityKg;
+    }
+
+    public static Vehicle from(
+            final String vehicleLicensePlate,
+            final VehicleType vehicleType,
+            final Double maxCapacityKg
+    ) {
+        return new Vehicle(vehicleLicensePlate, vehicleType, maxCapacityKg);
+    }
+
+    public static Vehicle of(final Vehicle vehicle) {
+        return Vehicle.from(vehicle.getVehicleLicensePlate(), vehicle.getVehicleType(), vehicle.getMaxCapacityKg());
+    }
 }

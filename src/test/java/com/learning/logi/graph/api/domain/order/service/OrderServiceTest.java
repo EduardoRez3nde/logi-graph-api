@@ -5,7 +5,7 @@ import com.learning.logi.graph.api.domain.order.dto.OrderResponseDTO;
 import com.learning.logi.graph.api.domain.order.entities.Order;
 import com.learning.logi.graph.api.domain.order.enums.OrderStatus;
 import com.learning.logi.graph.api.domain.order.repository.OrderRepository;
-import com.learning.logi.graph.api.presentation.exceptions.ResourceNotFound;
+import com.learning.logi.graph.api.presentation.exceptions.ResourceNotFoundException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,6 +35,9 @@ class OrderServiceTest {
 
     @Mock
     private OrderRepository orderRepository;
+
+    @Mock
+    private GeometryFactory geometryFactory;
 
     @InjectMocks
     private OrderService orderService;
@@ -112,7 +115,7 @@ class OrderServiceTest {
             when(orderRepository.findById(nonExistent)).thenReturn(Optional.empty());
 
             Assertions.assertThatThrownBy(() -> orderService.findById(nonExistent))
-                    .isInstanceOf(ResourceNotFound.class)
+                    .isInstanceOf(ResourceNotFoundException.class)
                     .hasMessageContaining("resource not found with id " + nonExistent);
         }
 
