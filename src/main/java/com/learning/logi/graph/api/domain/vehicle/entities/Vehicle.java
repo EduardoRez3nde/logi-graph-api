@@ -2,7 +2,6 @@ package com.learning.logi.graph.api.domain.vehicle.entities;
 
 import com.learning.logi.graph.api.domain.vehicle.enums.VehicleType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,13 +1,15 @@
 package com.learning.logi.graph.api.domain.order.dto;
 
+import com.learning.logi.graph.api.domain.delivery_man.enums.DeliveryManStatus;
 import com.learning.logi.graph.api.domain.order.entities.Order;
+import com.learning.logi.graph.api.domain.order.enums.OrderStatus;
 
 import java.time.Instant;
 
 public record OrderResponseDTO(
         Long id,
         String description,
-        String status,
+        OrderStatus status,
         Double collectLon,
         Double collectLat,
         Double deliveryLon,
@@ -18,7 +20,7 @@ public record OrderResponseDTO(
     public static OrderResponseDTO from(
             final Long id,
             final String description,
-            final String status,
+            final OrderStatus status,
             final Double collectLon,
             final Double collectLat,
             final Double deliveryLon,
@@ -43,7 +45,7 @@ public record OrderResponseDTO(
         return from(
                 order.getId(),
                 order.getDescription(),
-                order.getOrderStatus().name(),
+                order.getOrderStatus(),
                 order.getCollectionPoint().getX(),
                 order.getCollectionPoint().getY(),
                 order.getDeliveredPoint().getX(),

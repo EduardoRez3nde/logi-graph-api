@@ -1,15 +1,16 @@
 package com.learning.logi.graph.api.domain.vehicle.dto;
 
 import com.learning.logi.graph.api.domain.vehicle.entities.Vehicle;
+import com.learning.logi.graph.api.domain.vehicle.enums.VehicleType;
 
 public record VehicleUpdateDTO(
         String vehicleLicensePlate,
-        String vehicleType,
+        VehicleType vehicleType,
         double maxCapacityKg
 ) {
     public static VehicleUpdateDTO from(
             final String vehicleLicensePlate,
-            final String vehicleType,
+            final VehicleType vehicleType,
             final double maxCapacityKg
     ) {
         return new VehicleUpdateDTO(vehicleLicensePlate, vehicleType, maxCapacityKg);
@@ -18,7 +19,7 @@ public record VehicleUpdateDTO(
     public static VehicleUpdateDTO of(final Vehicle vehicle) {
         return VehicleUpdateDTO.from(
                 vehicle.getVehicleLicensePlate(),
-                vehicle.getVehicleType().name(),
+                vehicle.getVehicleType(),
                 vehicle.getMaxCapacityKg()
         );
     }

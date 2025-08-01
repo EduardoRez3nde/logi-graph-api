@@ -40,7 +40,7 @@ public class VehicleServiceTest {
         String vehiclePlate = "ABC-1233";
         Long vehicleId = 1L;
 
-        VehicleInsertDTO vehicleInsert = new VehicleInsertDTO(vehiclePlate, VehicleType.CAR.name(), 20.0);
+        VehicleInsertDTO vehicleInsert = new VehicleInsertDTO(vehiclePlate, VehicleType.CAR, 20.0);
 
         when(vehicleRepository.findByPlateVehicle(vehiclePlate)).thenReturn(Optional.empty());
 
@@ -64,7 +64,7 @@ public class VehicleServiceTest {
 
         String vehiclePlate = "ABC-1233";
 
-        VehicleInsertDTO vehicleInsert = new VehicleInsertDTO(vehiclePlate, VehicleType.CAR.name(), 20.0);
+        VehicleInsertDTO vehicleInsert = new VehicleInsertDTO(vehiclePlate, VehicleType.CAR, 20.0);
 
         when(vehicleRepository.findByPlateVehicle(vehiclePlate))
                 .thenReturn(Optional.of(new Vehicle()));

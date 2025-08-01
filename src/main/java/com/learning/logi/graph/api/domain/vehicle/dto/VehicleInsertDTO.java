@@ -5,12 +5,12 @@ import com.learning.logi.graph.api.domain.vehicle.enums.VehicleType;
 
 public record VehicleInsertDTO(
         String vehicleLicensePlate,
-        String vehicleType,
+        VehicleType vehicleType,
         double maxCapacityKg
 ) {
     public static VehicleInsertDTO from(
             final String vehicleLicensePlate,
-            final String vehicleType,
+            final VehicleType vehicleType,
             final double maxCapacityKg
     ) {
         return new VehicleInsertDTO(vehicleLicensePlate, vehicleType, maxCapacityKg);
@@ -19,7 +19,7 @@ public record VehicleInsertDTO(
     public static VehicleInsertDTO of(final Vehicle vehicle) {
         return VehicleInsertDTO.from(
                 vehicle.getVehicleLicensePlate(),
-                vehicle.getVehicleType().name(),
+                vehicle.getVehicleType(),
                 vehicle.getMaxCapacityKg()
         );
     }

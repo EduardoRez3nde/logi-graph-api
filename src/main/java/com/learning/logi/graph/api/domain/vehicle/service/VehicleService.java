@@ -1,5 +1,6 @@
 package com.learning.logi.graph.api.domain.vehicle.service;
 
+import com.learning.logi.graph.api.domain.delivery_man.enums.DeliveryManStatus;
 import com.learning.logi.graph.api.domain.delivery_man.repository.DeliveryManRepository;
 import com.learning.logi.graph.api.domain.vehicle.dto.VehicleInsertDTO;
 import com.learning.logi.graph.api.domain.vehicle.dto.VehicleResponseDTO;
@@ -70,9 +71,9 @@ public class VehicleService {
     @Transactional
     public void delete(final Long id) {
         final Vehicle vehicle = vehicleRepository.findById(id)
-                .orElseThrow(() -> new VehicleNotFoundException("Vehicle with ID " + "id " + "not found."));
+                .orElseThrow(() -> new VehicleNotFoundException("Vehicle with ID " + id + "not found."));
 
-        boolean inUse = deliveryManRepository.existsByVehicleAndActiveTrue(vehicle);
+        boolean inUse = deliveryManRepository.existsByVehicleIdAndDeliveryManStatus(vehicle.getId(), DeliveryManStatus.AVAILABLE);
 
         if (inUse) {
             throw new VehicleDeletionNotAllowedException("Vehicle is associated with an active delivery person and cannot be removed.");

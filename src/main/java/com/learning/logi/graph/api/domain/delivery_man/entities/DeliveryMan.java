@@ -17,7 +17,6 @@ import java.util.List;
 @Setter
 @Getter
 @EqualsAndHashCode(callSuper = false)
-@AllArgsConstructor
 @Entity
 @Table(name = "tb_delivery_man")
 public class DeliveryMan extends AuditableEntity {
@@ -35,7 +34,7 @@ public class DeliveryMan extends AuditableEntity {
     @Enumerated(EnumType.STRING)
     private DeliveryManStatus deliveryManStatus;
 
-    //@Column(columnDefinition = "geography(Point, 4326)")
+    @Column(columnDefinition = "geography(Point, 4326)")
     private Point currentLocation;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -46,4 +45,25 @@ public class DeliveryMan extends AuditableEntity {
     private final List<Order> orders = new ArrayList<>();
 
     public DeliveryMan() { }
+
+    private DeliveryMan(
+            final  String name,
+            final String email,
+            final DeliveryManStatus deliveryManStatus,
+            final Vehicle vehicle
+    ) {
+        this.name = name;
+        this.email = email;
+        this.deliveryManStatus = deliveryManStatus;
+        this.vehicle = vehicle;
+    }
+
+    public static DeliveryMan from(
+            final  String name,
+            final String email,
+            final DeliveryManStatus deliveryManStatus,
+            final Vehicle vehicle
+    ) {
+        return new DeliveryMan(name, email, deliveryManStatus, vehicle);
+    }
 }
