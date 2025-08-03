@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class RouteService {
@@ -40,14 +39,8 @@ public class RouteService {
         final List<Long> nodeIds = pathResult.nodeIds();
         final Double totalCost = pathResult.totalCost();
 
-        final List<Map<String, Object>> coordinates = routeRepository.getCoordinatesForNodeIds(nodeIds);
+        final List<CoordinatesDTO> coordinates = routeRepository.getCoordinatesForNodeIds(nodeIds);
 
-        final List<CoordinatesDTO> path = coordinates.stream()
-                .map(coordinate -> new CoordinatesDTO(
-                        (Double) coordinate.get("longitude"),
-                        (Double) coordinate.get("latitude")
-                )).toList();
-
-        return new RouteDTO(path, totalCost);
+        return new RouteDTO(coordinates, totalCost);
     }
 }

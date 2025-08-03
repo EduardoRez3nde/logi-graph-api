@@ -58,7 +58,7 @@ public class VehicleService {
     @Transactional
     public VehicleResponseDTO insert(final VehicleInsertDTO vehicleInsert) {
 
-        final Optional<Vehicle> vehicleExists = vehicleRepository.findByPlateVehicle(vehicleInsert.vehicleLicensePlate());
+        final Optional<Vehicle> vehicleExists = vehicleRepository.findByVehicleLicensePlate(vehicleInsert.vehicleLicensePlate());
 
         if (vehicleExists.isPresent()) {
             throw new LicensePlateAlreadyRegisteredException("Plate already registered");

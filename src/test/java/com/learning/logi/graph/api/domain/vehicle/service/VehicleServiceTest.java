@@ -42,7 +42,7 @@ public class VehicleServiceTest {
 
         VehicleInsertDTO vehicleInsert = new VehicleInsertDTO(vehiclePlate, VehicleType.CAR, 20.0);
 
-        when(vehicleRepository.findByPlateVehicle(vehiclePlate)).thenReturn(Optional.empty());
+        when(vehicleRepository.findByVehicleLicensePlate(vehiclePlate)).thenReturn(Optional.empty());
 
         Vehicle vehicle = Vehicle.from(vehiclePlate, VehicleType.CAR, 20.0);
         vehicle.setId(vehicleId);
@@ -66,7 +66,7 @@ public class VehicleServiceTest {
 
         VehicleInsertDTO vehicleInsert = new VehicleInsertDTO(vehiclePlate, VehicleType.CAR, 20.0);
 
-        when(vehicleRepository.findByPlateVehicle(vehiclePlate))
+        when(vehicleRepository.findByVehicleLicensePlate(vehiclePlate))
                 .thenReturn(Optional.of(new Vehicle()));
 
         assertThatThrownBy(() -> vehicleSevice.insert(vehicleInsert))

@@ -28,7 +28,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-neo4j'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation("org.locationtech.jts:jts-core:1.19.0")
-	implementation("org.hibernate.orm:hibernate-spatial:7.0.7.Final")
+	implementation("org.hibernate.orm:hibernate-spatial")
 	implementation 'org.springframework.boot:spring-boot-starter-data-neo4j'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.postgresql:postgresql'
