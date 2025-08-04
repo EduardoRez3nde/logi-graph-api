@@ -9,13 +9,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public interface RouteRepository extends Neo4jRepository<IntersectionNode, Long> {
 
     @Query("MATCH (i:Intersection) " +
-            "WITH i, point.distance(i.location, point({longitude: $lon, latitude: $lat})) AS dist " +
+            "WITH i, point.distance(point({longitude: i.longitude, latitude: i.latitude}), point({longitude: $lon, latitude: $lat})) AS dist " +
             "RETURN id(i) AS nodeId ORDER BY dist ASC LIMIT 1")
     Long findNearestNodeId(@Param("lat") final double lat, @Param("lon") final double lon);
 
@@ -28,10 +27,11 @@ public interface RouteRepository extends Neo4jRepository<IntersectionNode, Long>
             "}) " +
             "YIELD nodeIds, totalCost " +
             "RETURN nodeIds, totalCost")
-    DijkstraResult findShortestPathDijkstra(@Param("startNodeId") Long startNodeId, @Param("endNodeId") Long endNodeId);
+    DijkstraResult findShortestPathDijkstra(@Param("startNodeId") final Long startNodeId, @Param("endNodeId") final Long endNodeId);
 
     @Query("UNWIND $nodeIds AS nodeId " +
-            "MATCH (n:Intersection) WHERE id(n) = nodeId " +
-            "RETURN n.location.longitude AS longitude, n.location.latitude AS latitude")
-    List<CoordinatesDTO> getCoordinatesForNodeIds(@Param("nodeIds") List<Long> nodeIds);
+            "MATCH (n:Intersection) " +
+            "WHERE id(n) = nodeId " +
+            "RETURN n.longitude AS longitude, n.latitude AS latitude")
+    List<CoordinatesDTO> getCoordinatesForNodeIds(@Param("nodeIds") final List<Long> nodeIds);
 }
