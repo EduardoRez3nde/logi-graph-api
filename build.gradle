@@ -30,6 +30,8 @@ dependencies {
 	implementation("org.locationtech.jts:jts-core:1.19.0")
 	implementation("org.hibernate.orm:hibernate-spatial")
 	implementation 'org.springframework.boot:spring-boot-starter-data-neo4j'
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation("ai.timefold.solver:timefold-solver-spring-boot-starter:1.11.0")
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'

@@ -11,6 +11,10 @@ spring:
         authentication:
             username: neo4j
             password: password
+    data:
+        redis:
+            host: redis
+            ports: 6379
     jpa:
         hibernate:
             ddl-auto: update
