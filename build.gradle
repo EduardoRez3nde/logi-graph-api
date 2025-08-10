@@ -29,11 +29,14 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation("org.locationtech.jts:jts-core:1.19.0")
 	implementation("org.hibernate.orm:hibernate-spatial")
-	implementation 'org.springframework.boot:spring-boot-starter-data-neo4j'
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 	implementation("ai.timefold.solver:timefold-solver-spring-boot-starter:1.11.0")
+	implementation("org.flywaydb:flyway-core:11.11.0")
+	implementation("ai.timefold.solver:timefold-solver-spring-boot-starter:1.24.0")
+
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.postgresql:postgresql'
+	runtimeOnly("org.flywaydb:flyway-database-postgresql:11.11.0")
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	runtimeOnly 'com.h2database:h2'

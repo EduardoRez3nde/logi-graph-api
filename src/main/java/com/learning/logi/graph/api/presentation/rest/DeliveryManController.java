@@ -19,7 +19,7 @@ public class DeliveryManController {
 
     private final DeliveryManService deliveryManService;
 
-    public DeliveryManController(DeliveryManService deliveryManService) {
+    public DeliveryManController(final DeliveryManService deliveryManService) {
         this.deliveryManService = deliveryManService;
     }
 

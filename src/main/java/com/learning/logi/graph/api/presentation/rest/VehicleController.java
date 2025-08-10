@@ -49,8 +49,8 @@ public class VehicleController {
 
     @PutMapping("/{id}")
     public ResponseEntity<VehicleResponseDTO> update(
-            @PathVariable Long id,
-            @RequestBody VehicleUpdateDTO vehicleDTO) {
+            @PathVariable final Long id,
+            @RequestBody final VehicleUpdateDTO vehicleDTO) {
 
         final VehicleResponseDTO response = vehicleService.update(id, vehicleDTO);
         return ResponseEntity.ok(response);

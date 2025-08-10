@@ -1,26 +1,38 @@
 package com.learning.logi.graph.api.domain.optimization.entities;
 
-import lombok.AllArgsConstructor;
+import ai.timefold.solver.core.api.domain.entity.PlanningEntity;
+import ai.timefold.solver.core.api.domain.lookup.PlanningId;
+import ai.timefold.solver.core.api.domain.variable.PlanningListVariable;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
-@AllArgsConstructor
-public class OptaVehicle implements OptaStandstill {
+@NoArgsConstructor
+@PlanningEntity
+public class OptaVehicle {
 
+    @PlanningId
     private Long id;
-    private Location startingPoint;
-    private Integer capacity;
 
-    private List<OptaCustomer> customers;
+    private Location depot;
 
-    public OptaVehicle() { }
+    private int capacity;
 
-    @Override
-    public Location getLocation() {
-        return startingPoint;
+    @PlanningListVariable(valueRangeProviderRefs = {"customerRange"})
+    private final List<OptaCustomer> customers = new ArrayList<>();
+
+    public OptaVehicle(
+            final Long id,
+            final Location depot,
+            final int capacity
+    ) {
+        this.id = id;
+        this.depot = depot;
+        this.capacity = capacity;
     }
 }

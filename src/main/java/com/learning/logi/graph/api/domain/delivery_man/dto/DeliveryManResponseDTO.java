@@ -11,7 +11,7 @@ public record DeliveryManResponseDTO(
         String vehicleLicensePlate
 ) {
     public static DeliveryManResponseDTO from(
-            Long id,
+            final Long id,
             final String name,
             final String email,
             final DeliveryManStatus status,

@@ -32,6 +32,7 @@ public class DeliveryMan extends AuditableEntity {
     private String email;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private DeliveryManStatus deliveryManStatus;
 
     @Column(columnDefinition = "geography(Point, 4326)")
@@ -41,7 +42,7 @@ public class DeliveryMan extends AuditableEntity {
     @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
 
-    @OneToMany(mappedBy = "deliveryMan", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "deliveryMan", cascade = CascadeType.MERGE, orphanRemoval = true)
     private final List<Order> orders = new ArrayList<>();
 
     public DeliveryMan() { }

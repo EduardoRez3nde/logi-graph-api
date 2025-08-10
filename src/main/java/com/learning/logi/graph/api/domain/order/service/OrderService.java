@@ -21,7 +21,7 @@ public class OrderService {
     private final GeometryFactory geometryFactory;
 
 
-    public OrderService(OrderRepository orderRepository, GeometryFactory geometryFactory) {
+    public OrderService(final OrderRepository orderRepository, final GeometryFactory geometryFactory) {
         this.orderRepository = orderRepository;
         this.geometryFactory = geometryFactory;
     }

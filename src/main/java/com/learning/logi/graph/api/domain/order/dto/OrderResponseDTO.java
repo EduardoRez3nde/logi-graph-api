@@ -1,6 +1,5 @@
 package com.learning.logi.graph.api.domain.order.dto;
 
-import com.learning.logi.graph.api.domain.delivery_man.enums.DeliveryManStatus;
 import com.learning.logi.graph.api.domain.order.entities.Order;
 import com.learning.logi.graph.api.domain.order.enums.OrderStatus;
 

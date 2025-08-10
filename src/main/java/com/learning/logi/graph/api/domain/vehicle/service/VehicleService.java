@@ -26,7 +26,7 @@ public class VehicleService {
     private final DeliveryManRepository deliveryManRepository;
 
 
-    public VehicleService(VehicleRepository vehicleRepository, DeliveryManRepository deliveryManRepository) {
+    public VehicleService(final VehicleRepository vehicleRepository, final DeliveryManRepository deliveryManRepository) {
         this.vehicleRepository = vehicleRepository;
         this.deliveryManRepository = deliveryManRepository;
     }
@@ -73,12 +73,11 @@ public class VehicleService {
         final Vehicle vehicle = vehicleRepository.findById(id)
                 .orElseThrow(() -> new VehicleNotFoundException("Vehicle with ID " + id + "not found."));
 
-        boolean inUse = deliveryManRepository.existsByVehicleIdAndDeliveryManStatus(vehicle.getId(), DeliveryManStatus.AVAILABLE);
+        final boolean inUse = deliveryManRepository.existsByVehicleIdAndDeliveryManStatus(vehicle.getId(), DeliveryManStatus.AVAILABLE);
 
         if (inUse) {
             throw new VehicleDeletionNotAllowedException("Vehicle is associated with an active delivery person and cannot be removed.");
         }
         vehicleRepository.delete(vehicle);
     }
-
 }

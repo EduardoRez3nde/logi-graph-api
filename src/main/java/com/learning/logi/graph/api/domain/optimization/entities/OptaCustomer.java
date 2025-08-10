@@ -1,35 +1,36 @@
 package com.learning.logi.graph.api.domain.optimization.entities;
 
-import ai.timefold.solver.core.api.domain.entity.PlanningEntity;
-import ai.timefold.solver.core.api.domain.variable.InverseRelationShadowVariable;
-import ai.timefold.solver.core.api.domain.variable.PlanningVariable;
+import ai.timefold.solver.core.api.domain.lookup.PlanningId;
 import com.learning.logi.graph.api.domain.optimization.enums.CustomerType;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 @Getter
 @Setter
-@AllArgsConstructor
-@PlanningEntity
-public class OptaCustomer implements OptaStandstill {
+@NoArgsConstructor
+public class OptaCustomer {
+
+    @PlanningId
+    private String id;
 
     private Long orderId;
     private CustomerType type;
     private Location location;
     private int demand;
 
-    @PlanningVariable(valueRangeProviderRefs = {"vehicleRange", "customerRange"})
-    private OptaStandstill previousStandstill;
-
-    @InverseRelationShadowVariable(sourceVariableName = "customers")
-    private OptaVehicle vehicle;
-
-    @Override
-    public Location getLocation() {
-        return location;
+    public OptaCustomer(
+            final String id,
+            final Long orderId,
+            final Location location,
+            final CustomerType type,
+            final int demand
+    ) {
+        this.demand = demand;
+        this.location = location;
+        this.type = type;
+        this.orderId = orderId;
+        this.id = id;
     }
-
-    public OptaCustomer() { }
 }

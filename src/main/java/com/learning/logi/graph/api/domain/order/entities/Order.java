@@ -34,7 +34,7 @@ public class Order extends AuditableEntity {
     @Column(columnDefinition = "geography(Point, 4326)")
     private Point deliveredPoint;
 
-    @Column(name = "updated_on")
+    @Column(name = "delivered_on")
     protected Instant deliveredOn;
 
     @ManyToOne(fetch = FetchType.LAZY)

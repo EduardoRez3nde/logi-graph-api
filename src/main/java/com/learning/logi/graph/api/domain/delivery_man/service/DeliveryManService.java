@@ -24,7 +24,11 @@ public class DeliveryManService {
 
     private final GeometryFactory geometryFactory;
 
-    public DeliveryManService(DeliveryManRepository deliveryManRepository, VehicleRepository vehicleRepository, GeometryFactory geometryFactory) {
+    public DeliveryManService(
+            final DeliveryManRepository deliveryManRepository,
+            final VehicleRepository vehicleRepository,
+            final GeometryFactory geometryFactory
+    ) {
         this.deliveryManRepository = deliveryManRepository;
         this.vehicleRepository = vehicleRepository;
         this.geometryFactory = geometryFactory;
@@ -67,7 +71,6 @@ public class DeliveryManService {
         DeliveryMan deliveryMan = deliveryManRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Delivery person with ID " + id + " not found."));
 
-        // adicionar logica de transição de status
         deliveryMan.setDeliveryManStatus(newStatus);
 
         deliveryManRepository.save(deliveryMan);
