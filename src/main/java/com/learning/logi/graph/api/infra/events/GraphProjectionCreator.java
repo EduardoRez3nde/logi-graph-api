@@ -3,11 +3,13 @@ package com.learning.logi.graph.api.infra.events;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.event.EventListener;
 import org.springframework.data.neo4j.core.Neo4jClient;
 import org.springframework.stereotype.Component;
 
 @Component
+@DependsOn("neo4jMigrationsInitializer")
 public class GraphProjectionCreator {
 
     private final Logger LOGGER = LoggerFactory.getLogger(GraphProjectionCreator.class);

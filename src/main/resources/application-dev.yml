@@ -6,8 +6,16 @@ spring:
         url: jdbc:postgresql://db:5432/logi_graph_db
         username: postgres
         password: 123
+    flyway:
+        locations:
+            - classpath:db/migrations
     neo4j:
         uri: bolt://neo4j:7687
+        migrations:
+            locations-to-scan:
+                - neo4j/migrations
+            validate-on-startup: true
+            autoclose-connection: true
         authentication:
             username: neo4j
             password: password

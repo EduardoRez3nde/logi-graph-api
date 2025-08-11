@@ -33,6 +33,7 @@ dependencies {
 	implementation("ai.timefold.solver:timefold-solver-spring-boot-starter:1.11.0")
 	implementation("org.flywaydb:flyway-core:11.11.0")
 	implementation("ai.timefold.solver:timefold-solver-spring-boot-starter:1.24.0")
+	implementation 'eu.michael-simons.neo4j:neo4j-migrations-spring-boot-starter:2.0.3'
 
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.postgresql:postgresql'

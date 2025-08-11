@@ -1,0 +1,1 @@
+CREATE CONSTRAINT intersection_nodeId IF NOT EXISTS FOR (i:Intersection) REQUIRE i.nodeId IS UNIQUE;

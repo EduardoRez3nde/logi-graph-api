@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 
 @SpringBootApplication
-@EnableCaching
 @EnableJpaRepositories(
 		basePackages = {
 				"com.learning.logi.graph.api.domain.order.repository",
