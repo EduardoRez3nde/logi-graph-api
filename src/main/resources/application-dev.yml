@@ -6,6 +6,19 @@ spring:
         url: jdbc:postgresql://db:5432/logi_graph_db
         username: postgres
         password: 123
+    kafka:
+        bootstrap-servers: kafka:9092
+        consumer:
+            group-id: logi-graph-group
+            auto-offset-reset: earliest
+            key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+            properties:
+                spring.json.trusted.packages: 'com.learning.logi.graph.api.domain.*'
+                spring.json.value.default.type: com.learning.logi.graph.api.domain.driver.dto.LocationUpdateEvent
+        producer:
+            key-serializer: org.apache.kafka.common.serialization.StringSerializer
+            value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
     flyway:
         locations:
             - classpath:db/migrations
