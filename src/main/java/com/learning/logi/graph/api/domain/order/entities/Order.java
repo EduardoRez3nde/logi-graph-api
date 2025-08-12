@@ -38,7 +38,7 @@ public class Order extends AuditableEntity {
     protected Instant deliveredOn;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "deliveryman_id")
+    @JoinColumn(name = "delivery_man_id")
     private DeliveryMan deliveryMan;
 
     public Order() { }

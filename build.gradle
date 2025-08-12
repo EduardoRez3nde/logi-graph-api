@@ -34,7 +34,8 @@ dependencies {
 	implementation("org.flywaydb:flyway-core:11.11.0")
 	implementation("ai.timefold.solver:timefold-solver-spring-boot-starter:1.24.0")
 	implementation 'eu.michael-simons.neo4j:neo4j-migrations-spring-boot-starter:2.0.3'
-	implementation("org.springframework.kafka:spring-kafka:3.3.8")
+	implementation 'org.springframework.kafka:spring-kafka'
+
 
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.postgresql:postgresql'
@@ -43,6 +44,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	runtimeOnly 'com.h2database:h2'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	testImplementation 'org.springframework.kafka:spring-kafka-test'
 }
 
 tasks.named('test') {

@@ -1,7 +1,5 @@
--- Garante que a extensão PostGIS está ativa antes de criar as tabelas
 CREATE EXTENSION IF NOT EXISTS postgis;
 
--- Tabela para os veículos
 CREATE TABLE tb_vehicle (
     id BIGSERIAL PRIMARY KEY,
     vehicle_license_plate VARCHAR(255) NOT NULL,
@@ -9,7 +7,6 @@ CREATE TABLE tb_vehicle (
     max_capacity_kg DOUBLE PRECISION NOT NULL
 );
 
--- Tabela para os entregadores
 CREATE TABLE tb_delivery_man (
     id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -22,7 +19,6 @@ CREATE TABLE tb_delivery_man (
     CONSTRAINT fk_vehicle FOREIGN KEY (vehicle_id) REFERENCES tb_vehicle(id)
 );
 
--- Tabela para os pedidos
 CREATE TABLE tb_order (
     id BIGSERIAL PRIMARY KEY,
     description TEXT NOT NULL,
@@ -30,8 +26,8 @@ CREATE TABLE tb_order (
     collection_point GEOGRAPHY(POINT, 4326),
     delivered_point GEOGRAPHY(POINT, 4326),
     delivered_on TIMESTAMP(6) WITH TIME ZONE,
-    deliveryman_id BIGINT,
+    delivery_man_id BIGINT,
     created_on TIMESTAMP(6) WITH TIME ZONE NOT NULL,
 
-    CONSTRAINT fk_delivery_man FOREIGN KEY (deliveryman_id) REFERENCES tb_delivery_man(id)
+    CONSTRAINT fk_delivery_man FOREIGN KEY (delivery_man_id) REFERENCES tb_delivery_man(id)
 );

@@ -1,5 +1,7 @@
 package com.learning.logi.graph.api.presentation.rest;
 
+import com.learning.logi.graph.api.domain.driver.dto.TrackingResponse;
+import com.learning.logi.graph.api.domain.driver.service.DriverLocationService;
 import com.learning.logi.graph.api.domain.order.dto.OrderInsertDTO;
 import com.learning.logi.graph.api.domain.order.dto.OrderResponseDTO;
 import com.learning.logi.graph.api.domain.order.enums.OrderStatus;
@@ -17,9 +19,14 @@ import java.net.URI;
 public class OrderController {
 
     private final OrderService orderService;
+    private final DriverLocationService driverLocationService;
 
-    public OrderController(OrderService orderService) {
+    public OrderController(
+            final OrderService orderService,
+            final DriverLocationService driverLocationService
+    ) {
         this.orderService = orderService;
+        this.driverLocationService = driverLocationService;
     }
 
     @PostMapping
@@ -48,5 +55,17 @@ public class OrderController {
     ) {
         final Page<OrderResponseDTO> allOrderByStatus = orderService.findAllOrdersByStatus(OrderStatus.valueOf(status), pageable);
         return ResponseEntity.ok(allOrderByStatus);
+    }
+
+
+    @GetMapping("/{orderId}/track")
+    public ResponseEntity<TrackingResponse> trackOrder(@PathVariable final Long orderId) {
+
+        final TrackingResponse response = driverLocationService.getDriverLocationForOrder(orderId);
+
+        if (response == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(response);
     }
 }
