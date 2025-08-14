@@ -44,6 +44,10 @@ spring:
                 format_sql: true
                 dialect: org.hibernate.dialect.PostgreSQLDialect
                 temp_use_jdbc_metadata_defaults: false
+    elasticsearch:
+        uris: http://elasticsearch:9200
+        connection-timeout: 1s
+        socket-timeout: 30s
 timefold:
     solver:
         termination:

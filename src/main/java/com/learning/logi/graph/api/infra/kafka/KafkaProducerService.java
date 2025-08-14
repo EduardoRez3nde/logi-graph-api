@@ -1,24 +1,26 @@
 package com.learning.logi.graph.api.infra.kafka;
 
-import com.learning.logi.graph.api.domain.driver.dto.LocationUpdateEvent;
+import com.learning.logi.graph.api.configuration.kafka.KafkaEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.stereotype.Service;
 
-@Service
-public class KafkaProducerService {
+public class KafkaProducerService<T extends KafkaEvent> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaProducerService.class);
-    private static final String TOPIC = "driver_location_updates";
-    private final KafkaTemplate<String, LocationUpdateEvent> kafkaTemplate;
+    private final KafkaTemplate<String, T> kafkaTemplate;
 
-    public KafkaProducerService(final KafkaTemplate<String, LocationUpdateEvent> kafkaTemplate) {
+    public KafkaProducerService(final KafkaTemplate<String, T> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public void sendLocationUpdate(final LocationUpdateEvent event) {
-        this.kafkaTemplate.send(TOPIC, String.valueOf(event.deliveryManId()), event);
-        LOGGER.info("Evento de localização enviado para o Kafka: {}", event);
+    public void sendEvent(T event) {
+        try {
+            final String topicName = event.getTopic().getTopicName();
+            this.kafkaTemplate.send(topicName, event.getKey(), event);
+            LOGGER.info("Evento enviado com sucesso para o tópico '{}': {}", topicName, event);
+        } catch (Exception e) {
+            LOGGER.error("Falha ao enviar evento para o tópico '{}'", event.getTopic(), e);
+        }
     }
 }

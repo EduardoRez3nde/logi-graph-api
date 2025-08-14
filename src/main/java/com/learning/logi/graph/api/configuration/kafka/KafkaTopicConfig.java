@@ -16,6 +16,11 @@ public class KafkaTopicConfig {
                         .partitions(1)
                         .replicas(1)
                         .compact()
+                        .build(),
+                TopicBuilder
+                        .name("order_events")
+                        .partitions(1)
+                        .compact()
                         .build()
         );
     }

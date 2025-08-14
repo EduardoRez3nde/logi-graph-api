@@ -1,5 +1,6 @@
 package com.learning.logi.graph.api.domain.driver.service;
 
+import com.learning.logi.graph.api.configuration.kafka.KafkaEvent;
 import com.learning.logi.graph.api.domain.delivery_man.entities.DeliveryMan;
 import com.learning.logi.graph.api.domain.driver.dto.LocationUpdateEvent;
 import com.learning.logi.graph.api.domain.driver.dto.TrackingResponse;
@@ -17,12 +18,12 @@ import java.time.Instant;
 public class DriverLocationService {
 
     private final DriverLocationRepository driverLocationRepository;
-    private final KafkaProducerService kafkaProducerService;
+    private final KafkaProducerService<KafkaEvent> kafkaProducerService;
     private final OrderRepository orderRepository;
 
     public DriverLocationService(
             final DriverLocationRepository driverLocationRepository,
-            final KafkaProducerService kafkaProducerService,
+            final KafkaProducerService<KafkaEvent> kafkaProducerService,
             final OrderRepository orderRepository) {
         this.driverLocationRepository = driverLocationRepository;
         this.kafkaProducerService = kafkaProducerService;
@@ -32,7 +33,7 @@ public class DriverLocationService {
     public void updateAndPublishLocation(final Long driverId, final double latitude, final double longitude) {
         driverLocationRepository.updateLocation(driverId, longitude, latitude);
         final LocationUpdateEvent event = new LocationUpdateEvent(driverId, latitude, longitude, Instant.now());
-        kafkaProducerService.sendLocationUpdate(event);
+        kafkaProducerService.sendEvent(event);
     }
 
     public TrackingResponse getDriverLocationForOrder(final Long orderId) {

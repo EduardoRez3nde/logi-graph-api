@@ -35,6 +35,7 @@ dependencies {
 	implementation("ai.timefold.solver:timefold-solver-spring-boot-starter:1.24.0")
 	implementation 'eu.michael-simons.neo4j:neo4j-migrations-spring-boot-starter:2.0.3'
 	implementation 'org.springframework.kafka:spring-kafka'
+	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
 
 
 	compileOnly 'org.projectlombok:lombok'
