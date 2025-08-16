@@ -14,6 +14,8 @@ import com.learning.logi.graph.api.presentation.exceptions.ResourceNotFoundExcep
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OrderService {
 
+    private final static Logger LOGGER = LoggerFactory.getLogger(OrderService.class);
     private final OrderRepository orderRepository;
     private final GeometryFactory geometryFactory;
     private final KafkaProducerService<KafkaEvent> producerService;
@@ -54,6 +57,7 @@ public class OrderService {
 
         order = orderRepository.save(order);
         producerService.sendEvent(OrderUpdateEvent.of(order));
+        LOGGER.info("Evento enviado com sucesso para o tópico order_events");
 
         return OrderResponseDTO.of(order);
     }

@@ -22,9 +22,9 @@ public interface DeliveryManRepository extends JpaRepository<DeliveryMan, Long> 
 
 
     @Query(
-            value = "SELECT * " +
-                    "FROM tb_delivery_man dm " +
-                    "WHERE dm.delivery_man_status = 'AVAILABLE' AND ST_DWithin(dm.current_location, ST_MakePoint(:lon, :lat), :radius)",
+            value = "SELECT * FROM tb_delivery_man dm " +
+                    "WHERE dm.delivery_man_status = 'AVAILABLE' " +
+                    "AND ST_DWithin(dm.current_location, ST_SetSRID(ST_MakePoint(:lon, :lat), 4326)::geography, :radius)",
             nativeQuery = true
     )
     List<DeliveryMan> findAvailableDriversNearPoint(
